@@ -33,8 +33,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     //ARouter
     api 'com.alibaba:arouter-api:1.2.1.1'
-    //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
-    api 'com.google.code.gson:gson:2.8.6'
     //RxPermissions//运行时权限
     api 'com.permissionx.guolindev:permissionx:1.4.0'
     api 'com.github.bumptech.glide:glide:4.9.0'
@@ -44,15 +42,9 @@ dependencies {
     //Glioading
     api 'com.billy.android:gloading:1.0.0'
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
-    api 'com.squareup.okhttp3:okhttp:3.2.0'
     api 'com.kongzue.dialog_v3x:dialog:3.1.7'
     //加密库依赖（可选项）
     api 'com.android.support:multidex:1.0.1'
-    //注释掉原有bugly的仓库
-    //compile 'com.tencent.bugly:crashreport:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.3.2
-    api 'com.tencent.bugly:crashreport_upgrade:latest.release'
-    //其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
-    api 'com.tencent.bugly:nativecrashreport:latest.release'
     //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
     api 'androidx.recyclerview:recyclerview:1.2.0-alpha01'
     //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
@@ -62,12 +54,6 @@ dependencies {
     //新版本
     api 'org.greenrobot:eventbus:3.0.0'
     api 'com.tencent:mmkv:1.0.23'
-    //阿里推送
-//    api 'com.aliyun.ams:alicloud-android-push:3.1.2'
-//    api 'com.aliyun.ams:alicloud-android-third-push:3.0.8@aar'
-//    api 'com.aliyun.ams:huawei-push:2.6.3.305'
-//    api 'com.aliyun.ams:huawei-push-base:2.6.3.305'
-//    api 'com.aliyun.ams:alicloud-android-hotfix:3.2.15'
     api 'com.google.android:flexbox:2.0.1'
     api 'com.github.whytot:BadgeForAppIcon:v1.0.0-beta.2'
     api 'com.jaeger.statusbarutil:library:1.5.1'

@@ -11,8 +11,8 @@ import com.module_base.BuildConfig;
 import com.module_base.config.ModuleConfig;
 import com.module_base.gloading.GlobalAdapter;
 import com.module_base.util.ComData;
-import com.module_base.util.MLog;
 import com.module_base.util.MMkvUtil;
+import com.socks.library.KLog;
 import com.tencent.mmkv.MMKV;
 
 import java.io.File;
@@ -41,6 +41,7 @@ public class BaseApplication extends Application {
 //        modulesApplicationInit();//模块初始化applcation
         initMmkv();
         dirFile();
+        initKlog();
     }
 
     @Override
@@ -49,13 +50,12 @@ public class BaseApplication extends Application {
         MultiDex.install(this);
     }
 
-    private void initMelog() {
+    private void initKlog() {
         if (BuildConfig.DEBUG == true) {
-            MLog.init(true);
+            KLog.init(true);
         } else {
-            MLog.init(false);
+            KLog.init(false);
         }
-
     }
 
     private void initMmkv() {
