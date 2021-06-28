@@ -4,14 +4,11 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.billy.android.loading.Gloading;
 import com.kongzue.dialog.util.DialogSettings;
-import com.module_base.BuildConfig;
 import com.module_base.gloading.GlobalAdapter;
 import com.module_base.util.ComData;
 import com.module_base.util.MMkvUtil;
-import com.socks.library.KLog;
 import com.tencent.mmkv.MMKV;
 
 import java.io.File;
@@ -36,10 +33,8 @@ public class BaseApplication extends Application {
         //Gloading
         Gloading.initDefault(new GlobalAdapter());
         initDialog();//初始化V3dialog
-        initRouter(this);
         initMmkv();
         dirFile();
-        initKlog();
     }
 
     @Override
@@ -48,26 +43,9 @@ public class BaseApplication extends Application {
         MultiDex.install(this);
     }
 
-    private void initKlog() {
-        if (BuildConfig.DEBUG == true) {
-            KLog.init(true);
-        } else {
-            KLog.init(false);
-        }
-    }
-
     private void initMmkv() {
         MMKV.initialize(this);
         MMkvUtil.getInstance();
-    }
-
-
-    public static void initRouter(Application application) {
-        if (BuildConfig.DEBUG) {
-            ARouter.openLog();     // 打印日志
-            ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
-        }
-        ARouter.init(application);
     }
 
 
