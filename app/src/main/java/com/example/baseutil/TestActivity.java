@@ -1,7 +1,7 @@
 package com.example.baseutil;
 
 import com.example.baseutil.databinding.ActivityTestBinding;
-import com.module_base.util.BaseActivity;
+import com.base_util.util.BaseActivity;
 
 public class TestActivity extends BaseActivity<ActivityTestBinding> {
     @Override

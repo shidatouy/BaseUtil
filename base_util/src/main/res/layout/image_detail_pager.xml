@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <com.module_base.imagepager.HackyViewPager
+    <com.base_util.imagepager.HackyViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
