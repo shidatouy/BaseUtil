@@ -1,0 +1,14 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="status_bar_height">31dp</dimen>
+
+    <!-- 四类字体大小 -->
+    <!-- 四类字体大小 -->
+
+
+    <!-- 首页Gallery高度 -->
+    <!-- 首页Gallery高度 -->
+
+</resources>

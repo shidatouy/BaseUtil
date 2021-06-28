@@ -1,0 +1,213 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="AppTheme22" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/sp_16</item><!--调整字体大小-->
+    </style>
+
+    <!-- toolbar菜单样式 -->
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="actionMenuTextColor">@android:color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="actionMenuTextAppearance">@style/ToolbarMenuTextSize</item>
+        <!--<item name="selectableItemBackground">@drawable/toolbar_button_bg</item>-->
+    </style>
+
+    <!-- toolbar菜单文字尺寸 -->
+    <style name="ToolbarMenuTextSize" parent="@style/TextAppearance.AppCompat.Menu">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="OverflowMenuStyle" parent="@style/Widget.AppCompat.PopupMenu.Overflow">
+        <!-- 是否覆盖锚点，默认为true，即盖住Toolbar -->
+        <item name="overlapAnchor">false</item>
+        <item name="android:dropDownWidth">wrap_content</item>
+        <item name="android:paddingRight">0dp</item>
+        <!-- 弹出层背景颜色 -->
+        <!--<item name="android:popupBackground">@drawable/ic_menu_bg</item>-->
+        <!--<item name="android:background">@drawable/ic_menu_bg</item>-->
+        <!-- 弹出层垂直方向上的偏移，即在竖直方向上距离Toolbar的距离，值为负则会盖住Toolbar -->
+<!--        <item name="android:dropDownVerticalOffset">-7dp</item>-->
+        <!-- 弹出层水平方向上的偏移，即距离屏幕左边的距离，负值会导致右边出现空隙 -->
+        <item name="android:dropDownHorizontalOffset">0dp</item>
+        <!-- 设置弹出菜单文字颜色 -->
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:colorBackground">#4c4c4c</item>
+        <item name="android:dropDownListViewStyle">@style/PopupMenuListView</item>
+        <!--<item name="android:dropDownListViewStyle">@style/AppDropDownListViewStyle</item>-->
+    </style>
+
+    <style name="PopupMenuListView" parent="@android:style/Widget.Holo.ListView.DropDown">
+        <item name="android:divider">#cccccc</item>
+        <item name="android:dividerHeight">1px</item>
+    </style>
+
+    <!-- toolbar标题样式 -->
+    <style name="ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- 定义porssgdialog -->
+    <style name="loading_dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <!-- button 最大的尺寸 -->
+    <style name="BigButton" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:background">@drawable/big_button_effect</item>
+        <item name="android:textColor">@color/button_text_color</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+    </style>
+
+    <!-- 从下往上 -->
+    <style name="animTranslate">
+        <item name="android:windowEnterAnimation">@anim/translate_in</item>
+        <item name="android:windowExitAnimation">@anim/translate_out</item>
+    </style>
+    <!-- 渐隐显示 -->
+    <style name="animAlpha">
+        <item name="android:windowEnterAnimation">@anim/alpha_in</item>
+        <item name="android:windowExitAnimation">@anim/alpha_out</item>
+    </style>
+    <!-- 缩放 从小到大 -->
+    <!-- 旋转 -->
+
+    <!-- text 通用设置 -->
+    <!-- textview padding=5  textSize=14sp -->
+    <style name="text_padding_5">
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/text333</item>
+    </style>
+
+    <style name="BaseNoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <!--仿微信样式，注意每一项都不能少-->
+    <style name="picture.WeChat.style" parent="BaseNoActionBarTheme">
+        <!-- Customize your theme here. -->
+        <!--标题栏背景色-->
+        <item name="colorPrimary">@color/app_color_grey</item>
+        <!--状态栏背景色-->
+        <item name="colorPrimaryDark">@color/app_color_grey</item>
+        <!--是否改变图片列表界面状态栏字体颜色为黑色-->
+        <item name="picture.statusFontColor">false</item>
+        <!--返回键图标-->
+        <item name="picture.leftBack.icon">@drawable/picture_icon_close</item>
+        <!--标题下拉箭头-->
+        <item name="picture.arrow_down.icon">@drawable/picture_icon_wechat_down</item>
+        <!--标题上拉箭头-->
+        <item name="picture.arrow_up.icon">@drawable/picture_icon_wechat_up</item>
+        <!--标题文字颜色-->
+        <item name="picture.title.textColor">@color/app_color_white</item>
+        <!--标题栏右边文字-->
+        <item name="picture.right.textColor">@color/app_color_white</item>
+        <!--图片列表勾选样式-->
+        <item name="picture.checked.style">@drawable/picture_wechat_num_selector</item>
+        <!--开启图片列表勾选数字模式,开启的话勾选样式要换-->
+        <item name="picture.style.checkNumMode">true</item>
+        <!--选择图片样式0/9-->
+        <item name="picture.style.numComplete">false</item>
+        <!--图片列表底部背景色-->
+        <item name="picture.bottom.bg">@color/app_color_grey</item>
+        <!--图片列表预览文字颜色-->
+        <item name="picture.preview.textColor">@color/app_color_white</item>
+        <!--图片列表已完成文字颜色-->
+        <item name="picture.complete.textColor">@color/app_color_white</item>
+        <!--图片已选数量圆点背景色-->
+        <item name="picture.num.style">@drawable/num_oval_blue</item>
+        <!--预览界面标题文字颜色-->
+        <item name="picture.ac_preview.title.textColor">@color/app_color_white</item>
+        <!--预览界面已完成文字颜色-->
+        <item name="picture.ac_preview.complete.textColor">@color/app_color_white</item>
+        <!--预览界面标题栏背景色-->
+        <item name="picture.ac_preview.title.bg">@color/app_color_grey</item>
+        <!--预览界面底部背景色-->
+        <item name="picture.ac_preview.bottom.bg">@color/app_color_grey</item>
+        <!--预览界面返回箭头-->
+        <item name="picture.preview.leftBack.icon">@drawable/picture_icon_back</item>
+        <!--裁剪页面标题背景色-->
+        <item name="picture.crop.toolbar.bg">@color/app_color_grey</item>
+        <!--裁剪页面状态栏颜色-->
+        <item name="picture.crop.status.color">@color/app_color_grey</item>
+        <!--裁剪页面标题文字颜色-->
+        <item name="picture.crop.title.color">@color/app_color_white</item>
+        <!--相册文件夹列表选中图标-->
+        <item name="picture.folder_checked_dot">@drawable/picture_orange_oval</item>
+    </style>
+    <!-- button 最小的尺寸 -->
+    <style name="MinButton" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_width">103dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:background">@drawable/big_button_effect</item>
+        <item name="android:textColor">@color/button_text_color</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">bottom|right</item>
+    </style>
+
+    <!-- button 字 尺寸 -->
+    <style name="MinTextBule">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginRight">123dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_width">123dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textColor">@color/word_text_color</item>
+        <item name="android:background">@drawable/pad_corners_blu_1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">bottom|right</item>
+    </style>
+
+
+
+    <!--弹框-->
+    <style name="AlertDialog" parent="Base.V7.Theme.AppCompat.Dialog">
+        <!-- 这里设置背景为透明，为了隐藏边框 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- 这里是修改顶部标题背景颜色，具体颜色自己定，可以是图片 -->
+        <item name="android:topDark">@android:color/white</item>
+        <!-- 这里是修改内容区域背景颜色 -->
+        <item name="android:centerDark">@android:color/white</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+
+    <!--主页底部Tag-->
+    <declare-styleable name="TagBottomView">
+        <attr name="bottom_icon" format="reference" />
+        <attr name="bottom_text" format="string|reference" />
+    </declare-styleable>
+
+</resources>
