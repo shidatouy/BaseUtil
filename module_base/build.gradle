@@ -12,11 +12,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
-            }
-        }
     }
 
     dataBinding {
@@ -43,11 +38,8 @@ dependencies {
     api 'com.billy.android:gloading:1.0.0'
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
     api 'com.kongzue.dialog_v3x:dialog:3.1.7'
-    //加密库依赖（可选项）
     api 'com.android.support:multidex:1.0.1'
-    //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
     api 'androidx.recyclerview:recyclerview:1.2.0-alpha01'
-    //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
     api 'com.github.gb-nick:PagerSlidingTabStrip:v1.0.5'
     //下拉 上拉刷新
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-22'
