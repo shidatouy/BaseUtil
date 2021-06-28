@@ -1,2 +1,2 @@
 rootProject.name = "BaseUtil"
-include ':app','module_base'
+include ':app','base_util'
