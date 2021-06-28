@@ -8,7 +8,6 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.billy.android.loading.Gloading;
 import com.kongzue.dialog.util.DialogSettings;
 import com.module_base.BuildConfig;
-import com.module_base.config.ModuleConfig;
 import com.module_base.gloading.GlobalAdapter;
 import com.module_base.util.ComData;
 import com.module_base.util.MMkvUtil;
@@ -38,7 +37,6 @@ public class BaseApplication extends Application {
         Gloading.initDefault(new GlobalAdapter());
         initDialog();//初始化V3dialog
         initRouter(this);
-//        modulesApplicationInit();//模块初始化applcation
         initMmkv();
         dirFile();
         initKlog();
@@ -63,24 +61,6 @@ public class BaseApplication extends Application {
         MMkvUtil.getInstance();
     }
 
-
-    private void modulesApplicationInit() {
-        for (String moduleImpl : ModuleConfig.MODULESLIST) {
-            try {
-                Class<?> clazz = Class.forName(moduleImpl);
-                Object obj = clazz.newInstance();
-                if (obj instanceof ApplicationImpl) {
-                    ((ApplicationImpl) obj).onCreate(this);
-                }
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     public static void initRouter(Application application) {
         if (BuildConfig.DEBUG) {
