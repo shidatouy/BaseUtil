@@ -44,7 +44,6 @@ dependencies {
     //下拉 上拉刷新
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-22'
     //新版本
-    api 'org.greenrobot:eventbus:3.0.0'
     api 'com.tencent:mmkv:1.0.23'
     api 'com.google.android:flexbox:2.0.1'
     api 'com.github.whytot:BadgeForAppIcon:v1.0.0-beta.2'
@@ -53,6 +52,6 @@ dependencies {
     api 'me.jessyan:autosize:1.2.1'
     //轮播
     api 'com.youth.banner:banner:2.1.0'
-    api 'com.github.shidatouy:okhttputils:v1.0.1'
+    api 'com.github.shidatouy:okhttputils:v1.0.2'
     api 'com.android.support:multidex:1.0.3'
 }
