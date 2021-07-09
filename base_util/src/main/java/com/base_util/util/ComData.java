@@ -19,6 +19,12 @@ import java.util.regex.Pattern;
 public class ComData {
 
     /**
+     * 文件资料库下载的文件地址
+     */
+    public static String filePath;
+
+
+    /**
      * 截取字符串的第一位到倒数第二位
      */
     public static String subString(String number) {

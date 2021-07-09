@@ -28,6 +28,7 @@ public class BaseApplication extends Application {
         Gloading.initDefault(new GlobalAdapter());
         initDialog();//初始化V3dialog
         initMmkv();
+        dirFile();
     }
 
     @Override
@@ -46,6 +47,19 @@ public class BaseApplication extends Application {
         DialogSettings.init();
         DialogSettings.style = DialogSettings.STYLE.STYLE_IOS;
         DialogSettings.theme = DialogSettings.THEME.LIGHT;
+
+        //文件下载地址
+        ComData.filePath = Environment.getExternalStorageDirectory() + "/Android/data/" + this.getPackageName() + "/imageFile/";
+    }
+
+    /**
+     * 创建下载文件
+     */
+    private void dirFile() {
+        File file = new File(ComData.filePath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
     }
 
 }
