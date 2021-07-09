@@ -1,40 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_title"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/mainColor"
     android:orientation="vertical">
 
-    <include layout="@layout/comview" />
-
-    <RelativeLayout
-        android:background="@color/mainColor"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/mainColor"
+        app:theme="@style/ToolbarTheme"
+        app:popupTheme="@style/OverflowMenuStyle"
+        app:titleTextAppearance="@style/ToolbarTitle">
 
-        <LinearLayout
-            android:id="@+id/layou_back"
-            android:layout_width="40dp"
-            android:layout_height="match_parent">
+    </androidx.appcompat.widget.Toolbar>
 
-            <ImageView
-                android:visibility="gone"
-                android:id="@+id/layout_select_back"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/point_left" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_centerInParent="true"
-            android:text=""
-            android:id="@+id/tv_menu_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:textSize="15sp" />
-    </RelativeLayout>
 </LinearLayout>
