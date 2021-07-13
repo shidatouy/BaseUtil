@@ -10,6 +10,9 @@ public class BasePresenter<V extends BaseView,M extends BaseModel>{
     }
 
     public void destroy() {
+        if (null == mView) {
+            return;
+        }
         OkHttpUtils.getInstance().cancelTag(mView.getContext());
         model = null;
     }
