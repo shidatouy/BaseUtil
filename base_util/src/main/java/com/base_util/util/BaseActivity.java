@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.jaeger.library.StatusBarUtil;
 import com.base_util.R;
-import com.zhy.http.okhttp.OkHttpUtils;
+import com.qq.okhttp.OkHttpUtils2;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -30,24 +30,16 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
      */
     public final String TAG = getClass().getName();
 
-    protected TextView title_tv;
-    protected LinearLayout layouBack;
-
-    protected ImageView left_icon;
-
     protected String  toolBarName = "", toolBarLeftState = "V";
 
     protected String state = "", id = "", mType = "", mUrl = "";
 
     protected int page = 1, pageCount;
 
-    protected boolean flag = false;
-
     private Toolbar toolbar;
 
     //ViewDataBinding
     protected T dataBinding;
-
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,39 +111,6 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
         StatusBarUtil.setLightMode(activity);
     }
 
-    /**
-     * 通过类名启动Activity
-     *
-     * @param cls
-     */
-    public void startActivity(Class<?> cls) {
-        startActivity(cls, null);
-    }
-
-    /**
-     * 通过类名启动Activity，并且含有Bundle数据
-     *
-     * @param pClass
-     * @param pBundle
-     */
-    protected void startActivity(Class<?> pClass, Bundle pBundle) {
-        Intent intent = new Intent(this, pClass);
-        if (pBundle != null) {
-            intent.putExtras(pBundle);
-        }
-        startActivity(intent);
-    }
-
-    /**
-     * 回到指定页面
-     */
-    public void goTopAcitvity(Class cls) {
-        Intent intent = new Intent(this, cls);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -169,7 +128,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
         // 结束Activity&从堆栈中移除
         AppManager.getAppManager().finishActivity(this);
         //根据 Tag 取消请求
-        OkHttpUtils.getInstance().cancelTag(this);
+        OkHttpUtils2.getInstance().cancelTag(this);
     }
 
     /**

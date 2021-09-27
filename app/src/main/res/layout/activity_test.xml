@@ -5,14 +5,18 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include layout="@layout/comtitle"/>
+
         <TextView
+            android:id="@+id/tv_click"
             android:text="测试"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

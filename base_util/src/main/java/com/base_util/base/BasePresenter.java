@@ -1,6 +1,7 @@
 package com.base_util.base;
 
-import com.zhy.http.okhttp.OkHttpUtils;
+
+import com.qq.okhttp.OkHttpUtils2;
 
 public class BasePresenter<V extends BaseView,M extends BaseModel>{
     protected V mView;
@@ -13,7 +14,7 @@ public class BasePresenter<V extends BaseView,M extends BaseModel>{
         if (null == mView) {
             return;
         }
-        OkHttpUtils.getInstance().cancelTag(mView.getContext());
+        OkHttpUtils2.getInstance().cancelTag(mView.getContext());
         model = null;
     }
 }

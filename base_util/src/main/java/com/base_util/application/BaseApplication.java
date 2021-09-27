@@ -2,16 +2,12 @@ package com.base_util.application;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Environment;
 
+import com.base_util.gloading.GlobalAdapter;
+import com.base_util.util.MMkvUtil;
 import com.billy.android.loading.Gloading;
 import com.kongzue.dialog.util.DialogSettings;
-import com.base_util.gloading.GlobalAdapter;
-import com.base_util.util.ComData;
-import com.base_util.util.MMkvUtil;
 import com.tencent.mmkv.MMKV;
-
-import java.io.File;
 
 import androidx.multidex.MultiDex;
 
@@ -45,7 +41,6 @@ public class BaseApplication extends Application {
         DialogSettings.init();
         DialogSettings.style = DialogSettings.STYLE.STYLE_IOS;
         DialogSettings.theme = DialogSettings.THEME.LIGHT;
-
     }
 
 }
