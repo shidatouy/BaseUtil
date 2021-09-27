@@ -105,7 +105,7 @@ public class TagBottomView extends LinearLayout {
 
     public void setMySelected(boolean selected) {
         if (selected) {
-            mTextView.setTextColor(getResources().getColor(R.color.mainColor));
+            mTextView.setTextColor(getResources().getColor(R.color.text666));
             mImageView.setSelected(true);
             if (isStartAnimation) {
                 isStartAnimation = false;

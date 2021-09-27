@@ -5,6 +5,7 @@ import android.view.View;
 import com.base_util.util.BaseActivity;
 import com.base_util.util.T;
 import com.example.baseutil.databinding.ActivityTestBinding;
+import com.jaeger.library.StatusBarUtil;
 
 public class TestActivity extends BaseActivity<ActivityTestBinding> {
     @Override
@@ -17,6 +18,7 @@ public class TestActivity extends BaseActivity<ActivityTestBinding> {
         toolBarName ="测试";
         toolBarLeftState ="G";
 
+        StatusBarUtil.setTransparent(this);
     }
 
     @Override

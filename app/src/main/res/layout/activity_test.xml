@@ -10,8 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/comtitle"/>
-
         <TextView
             android:id="@+id/tv_click"
             android:text="测试"
