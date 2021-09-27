@@ -32,7 +32,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
 
     protected String  toolBarName = "", toolBarLeftState = "V";
 
-    protected String state = "", id = "", mType = "", mUrl = "";
+    protected String state = "", id = "", mType = "";
 
     protected int page = 1, pageCount;
 
@@ -48,9 +48,8 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
         //初始化沉浸式
         Log.e("Activity", "run:--------->当前类名: " + TAG);
         AppManager.getAppManager().addActivity(this);
-        setStatusBar();
         initView();
-        initTitleView();
+//        initTitleView();
         setClick();
     }
 
@@ -64,10 +63,6 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
 
     private void setViewDataBinding() {
         dataBinding = DataBindingUtil.setContentView(this,getLayoutRes());
-    }
-
-    protected void setStatusBar() {
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.mainColor),0);
     }
 
     protected void initTitleView() {

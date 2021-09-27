@@ -6,6 +6,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/status_bar_height"
-        android:background="@color/mainColor" />
+        android:background="@color/colorAccent" />
 
 </LinearLayout>
