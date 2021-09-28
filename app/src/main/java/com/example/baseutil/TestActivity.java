@@ -19,10 +19,6 @@ public class TestActivity extends BaseActivity<ActivityTestBinding> {
         toolBarLeftState ="G";
 
         StatusBarUtil.setTransparent(this);
-    }
-
-    @Override
-    protected void setClick() {
         dataBinding.tvClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,4 +26,5 @@ public class TestActivity extends BaseActivity<ActivityTestBinding> {
             }
         });
     }
+
 }

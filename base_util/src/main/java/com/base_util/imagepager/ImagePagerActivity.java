@@ -65,11 +65,6 @@ public class ImagePagerActivity extends BaseActivity {
 		mPager.setCurrentItem(pagerPosition);
 	}
 
-	@Override
-	protected void setClick() {
-
-	}
-
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {

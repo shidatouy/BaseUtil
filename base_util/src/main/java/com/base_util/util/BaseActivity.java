@@ -50,7 +50,6 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
         AppManager.getAppManager().addActivity(this);
         initView();
 //        initTitleView();
-        setClick();
     }
 
     /**
@@ -59,7 +58,6 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
      */
     protected abstract int getLayoutRes();
     protected abstract void initView();
-    protected abstract void setClick();
 
     private void setViewDataBinding() {
         dataBinding = DataBindingUtil.setContentView(this,getLayoutRes());
