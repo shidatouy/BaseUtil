@@ -15,14 +15,13 @@ public class TestActivity extends BaseActivity<ActivityTestBinding> {
 
     @Override
     protected void initView() {
-        toolBarName ="测试";
-        toolBarLeftState ="G";
-
-        StatusBarUtil.setTransparent(this);
+        toolBarName = "测试";
+        toolBarLeftState = "G";
+        initWhiteTitle(this);
         dataBinding.tvClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                T.showShort(TestActivity.this,"a");
+                T.showShort(TestActivity.this, "a");
             }
         });
     }

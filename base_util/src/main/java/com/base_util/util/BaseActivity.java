@@ -99,7 +99,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
 
 
     //白色title调用
-    protected static void initTitle(Activity activity, View view) {
+    protected static void initWhiteTitle(Activity activity) {
         StatusBarUtil.setTranslucent(activity,0);
         StatusBarUtil.setLightMode(activity);
     }

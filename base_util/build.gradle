@@ -51,13 +51,12 @@ dependencies {
     api 'com.google.android:flexbox:2.0.1'
     api 'com.github.whytot:BadgeForAppIcon:v1.0.0-beta.2'
     api 'com.jaeger.statusbarutil:library:1.5.1'
-    //屏幕适配
-    api 'me.jessyan:autosize:1.2.1'
     //轮播
     api 'com.youth.banner:banner:2.1.0'
     api 'com.android.support:multidex:1.0.3'
-    api 'com.github.getActivity:ShapeView:2.2'
     api 'com.shuyu:GSYVideoPlayer:7.1.3'
     api 'org.litepal.guolindev:core:3.2.3'
     api 'com.github.shidatouy:okhttputils2:v1.0.0'
+    api 'io.github.lucksiege:pictureselector:v2.7.3-rc05'
+    api 'com.github.getActivity:ShapeView:6.0'
 }
