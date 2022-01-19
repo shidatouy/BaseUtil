@@ -56,5 +56,4 @@ dependencies {
     api 'org.litepal.guolindev:core:3.2.3'
     api 'com.github.shidatouy:okhttputils2:v1.0.0'
     api 'com.github.getActivity:ShapeView:6.0'
-    api 'id.zelory:compressor:2.1.0'
 }
