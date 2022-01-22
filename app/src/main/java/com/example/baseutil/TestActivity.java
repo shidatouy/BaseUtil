@@ -3,9 +3,12 @@ package com.example.baseutil;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.util.Base64;
 import android.view.View;
 
 import com.base_util.picseleter.PicSelect;
@@ -13,18 +16,26 @@ import com.base_util.util.BaseActivity;
 import com.base_util.util.ComData;
 import com.base_util.util.T;
 import com.base_util.util.Tools;
+import com.bumptech.glide.Glide;
 import com.example.baseutil.databinding.ActivityTestBinding;
 import com.jaeger.library.StatusBarUtil;
 import com.permissionx.guolindev.PermissionX;
 import com.permissionx.guolindev.callback.RequestCallback;
+import com.qq.okhttp.OkHttpUtils2;
+import com.qq.okhttp.callback.StringCallback;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 import androidx.annotation.Nullable;
+import id.zelory.compressor.Compressor;
+import okhttp3.Call;
 
 public class TestActivity extends BaseActivity<ActivityTestBinding> {
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_test;
@@ -39,9 +50,18 @@ public class TestActivity extends BaseActivity<ActivityTestBinding> {
             @Override
             public void onClick(View v) {
                 getPermission();
+//                T.showShort(TestActivity.this, "aaaaaaaaaaa");
             }
         });
+
+//        dataBinding.img.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ComData.seePicturePath(path, TestActivity.this);
+//            }
+//        });
     }
+
 
     private void getPermission() {
         PermissionX.init(this)
@@ -55,9 +75,16 @@ public class TestActivity extends BaseActivity<ActivityTestBinding> {
                             String imagePath = Environment.getExternalStorageDirectory()
                                     + File.separator + "Android" + File.separator + "data"
                                     + File.separator + getPackageName() + File.separator + "files" + File.separator + "imageFile" + File.separator;
+                            PicSelect.COMPRESS_PATH = Environment.getExternalStorageDirectory()
+                                    + File.separator + "Android" + File.separator + "data"
+                                    + File.separator + getPackageName() + File.separator + "files" + File.separator + "compressPath" + File.separator;
                             File file = new File(imagePath);
+                            File file2 = new File(PicSelect.COMPRESS_PATH);
                             if (!file.exists()) {
                                 file.mkdirs();
+                            }
+                            if (!file2.exists()) {
+                                file2.mkdirs();
                             }
                             Tools.initDialog(TestActivity.this);
                         }
@@ -77,12 +104,13 @@ public class TestActivity extends BaseActivity<ActivityTestBinding> {
                 if (null != data) {
                     Uri uri = data.getData();
                     String path = PicSelect.getRealPath(this, uri);
+                    path = PicSelect.initCompressorIO(this, path);
                 }
                 break;
 
-            case PicSelect.REQUEST_CAMERA: //  media.getFileName() 获取不到照片名字
+            case PicSelect.REQUEST_CAMERA: //
                 // 结果回调
-                String pth = PicSelect.CAMEAR_PATH;
+                PicSelect.CAMEAR_PATH = PicSelect.initCompressorIO(this, PicSelect.CAMEAR_PATH);
                 break;
         }
     }

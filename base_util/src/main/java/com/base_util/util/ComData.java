@@ -15,6 +15,7 @@ import com.base_util.imagepager.ImagePagerActivity;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -92,7 +93,7 @@ public class ComData {
 
     /**
      * @param images   图片数组 list<String>
-     * @param position 下标 从 0 开始
+     * @param position 下标
      */
     public static void seePicture(List<String> images, int position, Context context) {
         Intent intent = new Intent(context, ImagePagerActivity.class);
@@ -103,6 +104,23 @@ public class ComData {
         context.startActivity(intent);
     }
 
+    /**
+     * 图片数组 list<String>
+     */
+    public static void seePicturePath(String path, Context context) {
+        //update hqx
+        if (TextUtils.isEmpty(path)) {
+            return;
+        }
+        List<String> paths = new ArrayList<>();
+        paths.add(path);
+        Intent intent = new Intent(context, ImagePagerActivity.class);
+        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, (Serializable) paths);
+        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_INDEX, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        context.startActivity(intent);
+    }
 
     /**
      * 去除最后一个符号
@@ -163,29 +181,6 @@ public class ComData {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * 沙河机制
-     *
-     * @param context
-     * @return
-     */
-    public static String getSDPath(Context context) {
-        File sdDir = null;
-        boolean sdCardExist = Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED);// 判断sd卡是否存在
-        if (sdCardExist) {
-            if (Build.VERSION.SDK_INT >= 29) {
-                //Android10之后
-                sdDir = context.getExternalFilesDir(null);//获取应用所在根目录/Android/data/your.app.name/file/ 也可以根据沙盒机制传入自己想传的参数，存放在指定目录
-            } else {
-                sdDir = Environment.getExternalStorageDirectory();// 获取SD卡根目录
-            }
-        } else {
-            sdDir = Environment.getRootDirectory();// 获取跟目录
-        }
-        return sdDir.toString();
     }
 
 }
