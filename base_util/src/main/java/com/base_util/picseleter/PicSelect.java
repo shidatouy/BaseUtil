@@ -4,19 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 
-import com.base_util.util.Tools;
-
 import java.io.File;
-import java.io.IOException;
 
 import androidx.core.content.FileProvider;
-import id.zelory.compressor.Compressor;
 
 public class PicSelect {
     public static String CAMEAR_PATH = "";
@@ -122,32 +117,5 @@ public class PicSelect {
         return sdDir.toString();
     }
 
-    /**
-     * 使用Compressor IO模式自定义压缩
-     *
-     * @param path .setMaxWidth(640).setMaxHeight(480)这两个数值越高，压缩力度越小，图片也不清晰
-     *             .setQuality(75)这个方法只是设置图片质量，并不影响压缩图片的大小KB
-     *             .setCompressFormat(Bitmap.CompressFormat.WEBP) WEBP图片格式是Google推出的 压缩强，质量 高，但是IOS不识别，需要把图片转为字节流然后转PNG格式
-     *             .setCompressFormat(Bitmap.CompressFormat.PNG)PNG格式的压缩，会导致图片变大，并耗过大的内 存，手机反应缓慢
-     *             .setCompressFormat(Bitmap.CompressFormat.JPEG)JPEG压缩；压缩速度比PNG快，质量一般，基本上属于1/10的压缩比例
-     *
-     *  COMPRESS_PATH   压缩路径 指定同目录文件会出现压缩失败，防止压缩失败源文件也失效问题
-     */
-    public static String initCompressorIO(Context context, String path) {
-        String comprePath = "";
-        try {
-            File file = new Compressor(context)
-                    .setMaxWidth(640)
-                    .setMaxHeight(480)
-                    .setQuality(75)
-                    .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                    .setDestinationDirectoryPath(COMPRESS_PATH)
-                    .compressToFile(new File(path));
-            comprePath = file.getPath();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return comprePath;
-    }
 
 }

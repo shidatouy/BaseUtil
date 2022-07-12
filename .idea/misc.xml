@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/workspace/BaseUtil/app/src/main/res/layout/activity_main.xml" value="0.3496376811594203" />
         <entry key="..\:/workspace/BaseUtil/app/src/main/res/layout/activity_test.xml" value="0.21175278622087132" />
+        <entry key="..\:/workspace/BaseUtil/base_util/src/main/res/layout/comtitle.xml" value="0.20415400202634246" />
         <entry key="..\:/workspace/BaseUtil/base_util/src/main/res/layout/image_detail_fragment.xml" value="0.3546195652173913" />
         <entry key="..\:/workspace/BaseUtil/base_util/src/main/res/layout/image_detail_pager.xml" value="0.3546195652173913" />
         <entry key="..\:/workspace/BaseUtil/base_util/src/main/res/layout/pop_menulist.xml" value="0.3686594202898551" />

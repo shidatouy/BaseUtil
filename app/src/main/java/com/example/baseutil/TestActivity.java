@@ -3,38 +3,28 @@ package com.example.baseutil;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.util.Base64;
 import android.view.View;
 
 import com.base_util.picseleter.PicSelect;
 import com.base_util.util.BaseActivity;
 import com.base_util.util.ComData;
-import com.base_util.util.T;
 import com.base_util.util.Tools;
 import com.bumptech.glide.Glide;
 import com.example.baseutil.databinding.ActivityTestBinding;
 import com.jaeger.library.StatusBarUtil;
 import com.permissionx.guolindev.PermissionX;
 import com.permissionx.guolindev.callback.RequestCallback;
-import com.qq.okhttp.OkHttpUtils2;
-import com.qq.okhttp.callback.StringCallback;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 import androidx.annotation.Nullable;
-import id.zelory.compressor.Compressor;
-import okhttp3.Call;
 
 public class TestActivity extends BaseActivity<ActivityTestBinding> {
+    String path;
 
     @Override
     protected int getLayoutRes() {
@@ -43,9 +33,10 @@ public class TestActivity extends BaseActivity<ActivityTestBinding> {
 
     @Override
     protected void initView() {
-        toolBarName = "测试";
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary), 0);
+        toolBarName = "压缩";
         toolBarLeftState = "G";
-        initWhiteTitle(this);
+        initTitleView();
         dataBinding.tvClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +51,7 @@ public class TestActivity extends BaseActivity<ActivityTestBinding> {
 //                ComData.seePicturePath(path, TestActivity.this);
 //            }
 //        });
+        setClick();
     }
 
 
@@ -103,16 +95,28 @@ public class TestActivity extends BaseActivity<ActivityTestBinding> {
                 // 图片选择结果回调
                 if (null != data) {
                     Uri uri = data.getData();
-                    String path = PicSelect.getRealPath(this, uri);
-                    path = PicSelect.initCompressorIO(this, path);
+                    path = PicSelect.getRealPath(this, uri);
+//                    path = PicSelect.initCompressorIO(this, path);
+                    Glide.with(this).load(path).into(dataBinding.img);
                 }
                 break;
 
             case PicSelect.REQUEST_CAMERA: //
                 // 结果回调
-                PicSelect.CAMEAR_PATH = PicSelect.initCompressorIO(this, PicSelect.CAMEAR_PATH);
+//                PicSelect.CAMEAR_PATH = PicSelect.initCompressorIO(this, PicSelect.CAMEAR_PATH);
+                path = PicSelect.CAMEAR_PATH;
+                Glide.with(this).load(PicSelect.CAMEAR_PATH).into(dataBinding.img);
                 break;
         }
+    }
+
+    public void setClick() {
+        dataBinding.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ComData.seePicturePath(path, TestActivity.this);
+            }
+        });
     }
 
     public static String getSDPath(Context context) {
