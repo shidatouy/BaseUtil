@@ -35,6 +35,7 @@ public class Tools {
                     @Override
                     public void onClick(View v) {
                         PicSelect.getCamereAc(activity);
+
                         dialogA.disMiss();
                     }
                 });
