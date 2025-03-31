@@ -11,6 +11,7 @@ import android.view.View;
 import com.base_util.picseleter.PicSelect;
 import com.base_util.util.BaseActivity;
 import com.base_util.util.ComData;
+import com.base_util.util.GetFilePathFromUri;
 import com.base_util.util.Tools;
 import com.bumptech.glide.Glide;
 import com.example.baseutil.databinding.ActivityTestBinding;
@@ -95,7 +96,7 @@ public class TestActivity extends BaseActivity<ActivityTestBinding> {
                 // 图片选择结果回调
                 if (null != data) {
                     Uri uri = data.getData();
-                    path = PicSelect.getRealPath(this, uri);
+                    path = GetFilePathFromUri.getFileAbsolutePath(this, uri);
 //                    path = PicSelect.initCompressorIO(this, path);
                     Glide.with(this).load(path).into(dataBinding.img);
                 }

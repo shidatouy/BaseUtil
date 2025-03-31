@@ -69,30 +69,6 @@ public class PicSelect {
         }
     }
 
-    public static String getRealPath(Activity activity, Uri fileUrl) {
-        String fileName = null;
-        if (fileUrl != null) {
-            if (fileUrl.getScheme().toString().compareTo("content") == 0) // content://开头的uri
-            {
-                Cursor cursor = activity.getContentResolver().query(fileUrl, null, null, null, null);
-                if (cursor != null && cursor.moveToFirst()) {
-                    try {
-                        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                        fileName = cursor.getString(column_index); // 取出文件路径
-                    } catch (IllegalArgumentException e) {
-                        e.printStackTrace();
-                    } finally {
-                        cursor.close();
-                    }
-                }
-            } else if (fileUrl.getScheme().compareTo("file") == 0) // file:///开头的uri
-            {
-                fileName = fileUrl.getPath();
-            }
-        }
-        return fileName;
-    }
-
 
     /**
      * 沙河机制
