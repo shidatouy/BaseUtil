@@ -28,9 +28,8 @@ public class PicSelect {
     public static void getCamereAc(Activity activity) {
         String fileName = "img_" + System.currentTimeMillis() + ".jpg";
         //步骤一:创建存储照片的文件
-        String imagePath = Environment.getExternalStorageDirectory()
-                + File.separator + "Android" + File.separator + "data"
-                + File.separator + activity.getPackageName() + File.separator + "files" + File.separator + "imageFile" + File.separator + fileName;
+        String sdPath = getSDPath(activity);
+        String imagePath =sdPath +   File.separator + "imageFile" + File.separator + fileName;
         File file = new File(imagePath);
         //创建文件夹
         if (!file.getParentFile().exists()) {
@@ -83,7 +82,7 @@ public class PicSelect {
         if (sdCardExist) {
             if (Build.VERSION.SDK_INT >= 29) {
                 //Android10之后
-                sdDir = context.getExternalFilesDir(null);//获取应用所在根目录/Android/data/your.app.name/file/ 也可以根据沙盒机制传入自己想传的参数，存放在指定目录
+                sdDir = context.getExternalFilesDir(null);//storage/emulated/0/Android/data/com.example.app/files也可以根据沙盒机制传入自己想传的参数，存放在指定目录
             } else {
                 sdDir = Environment.getExternalStorageDirectory();// 获取SD卡根目录
             }
