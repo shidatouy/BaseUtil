@@ -50,4 +50,5 @@ dependencies {
     api 'com.github.getActivity:ShapeView:6.0'
     //ARouter
     api 'com.alibaba:arouter-api:1.2.1.1'
+    api 'androidx.recyclerview:recyclerview:1.2.0'
 }

@@ -15,7 +15,6 @@ import com.base_util.util.GetFilePathFromUri;
 import com.base_util.util.Tools;
 import com.bumptech.glide.Glide;
 import com.example.baseutil.databinding.ActivityTestBinding;
-import com.jaeger.library.StatusBarUtil;
 import com.permissionx.guolindev.PermissionX;
 import com.permissionx.guolindev.callback.RequestCallback;
 
@@ -30,11 +29,6 @@ public class TestActivity extends BaseActivity<ActivityTestBinding> {
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_test;
-    }
-
-    @Override
-    protected boolean isShowTitleBar() {
-        return true;
     }
 
     @Override
