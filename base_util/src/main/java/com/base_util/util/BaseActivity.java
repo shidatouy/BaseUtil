@@ -1,116 +1,126 @@
 package com.base_util.util;
 
-import android.app.Activity;
-import android.content.Intent;
+import static com.base_util.util.StatusBarKt.immersive;
+import static com.base_util.util.StatusBarKt.statusBarColor;
+
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.jaeger.library.StatusBarUtil;
-import com.base_util.R;
-import com.qq.okhttp.OkHttpUtils2;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
+import com.base_util.R;
+import com.qq.okhttp.OkHttpUtils2;
 
 public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatActivity {
-    /**
-     * Log的tag
-     */
+
     public final String TAG = getClass().getName();
 
-    protected String  toolBarName = "", toolBarLeftState = "V";
-
-    protected String state = "", id = "", mType = "";
-
-    protected int page = 1, pageCount;
+    protected String state = "", id = "";
 
     private Toolbar toolbar;
-
-    //ViewDataBinding
     protected T dataBinding;
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setViewDataBinding();
-        //初始化沉浸式
+
+        // ✅ 状态栏样式
+        if (isImmersiveStatusBar()) {
+            immersive(this, 0, true);
+        } else {
+            statusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimary));
+        }
+
+        // ✅ 标题栏：标题名不为空才显示
+        String title = getToolBarName();
+        if (title != null && !title.isEmpty()) {
+            initTitleView(title);
+        }
+
         Log.e("Activity", "run:--------->当前类名: " + TAG);
         AppManager.getAppManager().addActivity(this);
         initView();
-//        initTitleView();
+    }
+
+    // ==================== 子类可重写的方法 ====================
+
+    /**
+     * 是否沉浸式状态栏
+     * true：沉浸式（透明 + 暗色文字）
+     * false：普通（主题色）
+     */
+    protected boolean isImmersiveStatusBar() {
+        return false;  // 默认普通状态栏
     }
 
     /**
-     * 加载布局contentView
-     * @return 布局
+     * 标题栏名称
+     * 返回 null 或 ""：不显示标题栏（默认）
+     * 返回具体文字：显示标题栏
      */
+    protected String getToolBarName() {
+        return null;  // 默认不显示
+    }
+
+    /**
+     * 标题栏左侧按钮状态："V" 返回箭头，"I" 无，"G" 其他
+     */
+    protected String getToolBarLeftState() {
+        return "V";
+    }
+
+    // ==================== 抽象方法 ====================
+
     protected abstract int getLayoutRes();
     protected abstract void initView();
 
+    // ==================== 内部逻辑 ====================
+
     private void setViewDataBinding() {
-        dataBinding = DataBindingUtil.setContentView(this,getLayoutRes());
+        dataBinding = DataBindingUtil.setContentView(this, getLayoutRes());
     }
 
-    protected void initTitleView() {
+    private void initTitleView(String title) {
         try {
-            /**
-             * comtitle  的使用
-             */
-            toolbar = (Toolbar) findViewById(R.id.toolbar);
-            if (null != toolbar) {
-//                toolbar.setNavigationIcon(R.mipmap.point_left);
-                if (toolBarName != "") {
-                    toolbar.setTitle(toolBarName);
-                } else {
-                    toolbar.setTitle("");
-                }
+            toolbar = findViewById(R.id.toolbar);
+            if (toolbar != null) {
+                toolbar.setTitle(title);
                 setSupportActionBar(toolbar);
                 toolbar.setTitleTextColor(Color.WHITE);
 
-                switch (toolBarLeftState) {
+                switch (getToolBarLeftState()) {
                     case "V":
-                        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//添加默认的返回图标
-                        getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
+                        if (getSupportActionBar() != null) {
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                            getSupportActionBar().setHomeButtonEnabled(true);
+                        }
                         break;
                     case "I":
                         break;
                     case "G":
                         break;
                 }
-
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
-    //白色title调用
-    protected static void initWhiteTitle(Activity activity) {
-        StatusBarUtil.setTranslucent(activity,0);
-        StatusBarUtil.setLightMode(activity);
-    }
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
+        if (item.getItemId() == android.R.id.home) {
+            finish();
         }
         return true;
     }
@@ -118,15 +128,10 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // 结束Activity&从堆栈中移除
         AppManager.getAppManager().finishActivity(this);
-        //根据 Tag 取消请求
         OkHttpUtils2.getInstance().cancelTag(this);
     }
 
-    /**
-     * 设置 app 字体不随系统字体设置改变
-     */
     @Override
     public Resources getResources() {
         Resources res = super.getResources();
@@ -139,5 +144,4 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
         }
         return res;
     }
-
 }

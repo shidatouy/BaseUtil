@@ -16,7 +16,6 @@ import java.util.List;
 
 public class GsonUtil {
     public static Gson myGson = new GsonBuilder().registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory()).setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-    public static String filePath;
 
     /**
      * GSON 将 array 转成 list
@@ -29,7 +28,7 @@ public class GsonUtil {
     public static <T> List<T> stringToList(String json, Class clazz) {
         Type type = new ParameterizedTypeImpl(clazz);
         List<T> list = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss")
-               .create().fromJson(json, type);
+                .create().fromJson(json, type);
         return list;
     }
 

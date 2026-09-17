@@ -33,11 +33,17 @@ public class TestActivity extends BaseActivity<ActivityTestBinding> {
     }
 
     @Override
+    protected boolean isShowTitleBar() {
+        return true;
+    }
+
+    @Override
+    protected String getToolBarName() {
+        return "压缩";
+    }
+
+    @Override
     protected void initView() {
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary), 0);
-        toolBarName = "压缩";
-        toolBarLeftState = "G";
-        initTitleView();
         dataBinding.tvClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

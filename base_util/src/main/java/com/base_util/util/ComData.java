@@ -105,10 +105,9 @@ public class ComData {
     }
 
     /**
-     * 图片数组 list<String>
+     * 查看单个图片
      */
     public static void seePicturePath(String path, Context context) {
-        //update hqx
         if (TextUtils.isEmpty(path)) {
             return;
         }
@@ -132,16 +131,6 @@ public class ComData {
         return str.substring(0, str.length() - 1);
     }
 
-    /*
-     * 是否为浮点数？double或float类型。
-     * @param str 传入的字符串。
-     * @return 是浮点数返回true,否则返回false。
-     */
-    public static boolean isDoubleOrFloat(String str) {
-        Pattern pattern = Pattern.compile("^[-\\+]?[.\\d]*$");
-        return pattern.matcher(str).matches();
-    }
-
     /**
      * 根据总数和每页显示量，计算页数
      *
@@ -155,13 +144,6 @@ public class ComData {
         } else {
             return total / pageSize + 1;
         }
-    }
-
-
-    //获取当前获取焦点的元素id
-    public static int getFocusId(Activity activity) {
-        View rootView = activity.getWindow().getDecorView();
-        return rootView.findFocus().getId();
     }
 
 
