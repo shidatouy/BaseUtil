@@ -3,8 +3,8 @@ package com.base_util.util;
 import static com.base_util.util.StatusBarKt.immersive;
 import static com.base_util.util.StatusBarKt.statusBarColor;
 
+import android.content.Context;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +18,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
 import com.base_util.R;
+import com.base_util.picseleter.PicSelect;
 import com.qq.okhttp.OkHttpUtils2;
 
 public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatActivity {
@@ -34,10 +35,12 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setViewDataBinding();
+        // 相机把宿主进程挤掉后回来，恢复拍照中记录的文件
+        PicSelect.restoreState(this, savedInstanceState);
 
         // ✅ 状态栏样式
         if (isImmersiveStatusBar()) {
-            immersive(this, 0, true);
+            immersive(this, 0, isDarkStatusBarText());
         } else {
             statusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimary));
         }
@@ -62,6 +65,14 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
      */
     protected boolean isImmersiveStatusBar() {
         return false;  // 默认普通状态栏
+    }
+
+    /**
+     * 沉浸式状态下状态栏文字/图标是否用深色。
+     * 默认 true（浅色背景用深色文字）；黑底页面（如大图预览）请返回 false。
+     */
+    protected boolean isDarkStatusBarText() {
+        return true;
     }
 
     /**
@@ -121,27 +132,38 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
+            return true;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        AppManager.getAppManager().finishActivity(this);
+        // 出栈（只移除，不 finish —— 旋转屏幕时 onDestroy 也会走到这里）
+        AppManager.getAppManager().removeActivity(this);
+        // 取消本页用 tag(this) 发出的所有请求
         OkHttpUtils2.getInstance().cancelTag(this);
     }
 
     @Override
-    public Resources getResources() {
-        Resources res = super.getResources();
-        if (res != null) {
-            Configuration config = res.getConfiguration();
-            if (config != null && config.fontScale != 1.0f) {
-                config.fontScale = 1.0f;
-                res.updateConfiguration(config, res.getDisplayMetrics());
-            }
-        }
-        return res;
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // 记录拍照中的输出文件，进程被回收后能恢复
+        PicSelect.saveState(this, outState);
+    }
+
+    /**
+     * 强制字体不跟随系统缩放。
+     *
+     * 旧实现重写 getResources() 并 updateConfiguration()，那是改全局 Resources，
+     * 每次取资源都会触发一次配置刷新，容易出现闪烁、重复 onConfigurationChanged。
+     * 这里改为只影响本 Activity 的 Configuration。
+     */
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Configuration config = new Configuration(newBase.getResources().getConfiguration());
+        config.fontScale = 1.0f;
+        super.attachBaseContext(newBase.createConfigurationContext(config));
     }
 }

@@ -1,4 +1,4 @@
-package com.base_util.imagepager;
+package com.base_util.photopreview;
 
 import android.graphics.RectF;
 import android.view.GestureDetector;

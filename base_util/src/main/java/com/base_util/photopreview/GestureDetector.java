@@ -13,23 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.base_util.imagepager;
+package com.base_util.photopreview;
 
-import android.util.Log;
+import android.view.MotionEvent;
 
-/**
- * class that holds the {@link Logger} for this library, defaults to {@link LoggerDefault} to send logs to android {@link Log}
- */
-public final class LogManager {
+public interface GestureDetector {
 
-    private static Logger logger = new LoggerDefault();
+    public boolean onTouchEvent(MotionEvent ev);
 
-    public static void setLogger(Logger newLogger) {
-        logger = newLogger;
-    }
+    public boolean isScaling();
 
-    public static Logger getLogger() {
-        return logger;
-    }
+    public void setOnGestureListener(OnGestureListener listener);
 
 }

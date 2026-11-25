@@ -13,7 +13,7 @@ interface BaseModel {
 /**
  * BaseModel 的基础实现
  */
- abstract class BaseModelImpl : BaseModel {
+abstract class BaseModelImpl : BaseModel {
     private val requests = ArrayList<RequestCall>()
 
     override fun cancelRequests() {

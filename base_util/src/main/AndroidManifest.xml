@@ -3,10 +3,10 @@
 
     <application >
 
+        <!-- 大图预览 -->
         <activity
-            android:name="com.base_util.imagepager.ImagePagerActivity"
+            android:name="com.base_util.photopreview.PhotoPreviewActivity"
             android:label="图片查看"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
     </application>

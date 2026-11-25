@@ -8,8 +8,13 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
-/build
 /captures
 .externalNativeBuild
 .cxx
 local.properties
+
+# 各模块构建输出（原来只忽略了根目录 build）
+build/
+
+# WorkBuddy 本地项目数据
+.workbuddy/

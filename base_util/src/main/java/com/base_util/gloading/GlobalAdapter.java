@@ -13,7 +13,7 @@ import com.billy.android.loading.Gloading;
  * @since 19/3/18 18:37
  */
 public class GlobalAdapter implements Gloading.Adapter {
-    String HIDE_LOADING_STATUS_MSG = "hide_loading_status_msg";
+    private static final String HIDE_LOADING_STATUS_MSG = "hide_loading_status_msg";
 
     @Override
     public View getView(Gloading.Holder holder, View convertView, int status) {

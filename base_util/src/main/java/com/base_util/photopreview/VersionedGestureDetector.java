@@ -1,4 +1,4 @@
-package com.base_util.imagepager;
+package com.base_util.photopreview;
 
 /*******************************************************************************
  * Copyright 2011, 2012 Chris Banes.

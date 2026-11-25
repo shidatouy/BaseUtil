@@ -6,12 +6,14 @@ import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * Created on 2019/8/2 14 ${HINUTE}
+ * 给列表项之间加间距（第一项不加顶部间距）。
  *
- * @auther
+ * 注意：getChildPosition() 已在 API 22 废弃，且返回 NO_POSITION 时会被当成 0，
+ * 这里改用 getChildAdapterPosition()。
  */
-public class SpaceItemDecoration extends RecyclerView.ItemDecoration{
-    private int space;
+public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
+
+    private final int space;
 
     public SpaceItemDecoration(int space) {
         this.space = space;
@@ -19,8 +21,10 @@ public class SpaceItemDecoration extends RecyclerView.ItemDecoration{
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-
-        if(parent.getChildPosition(view) != 0)
+        int position = parent.getChildAdapterPosition(view);
+        // 第一项与 NO_POSITION(-1) 都不加顶部间距；旧写法 > NO_POSITION 会把第一项也算进去
+        if (position > 0) {
             outRect.top = space;
+        }
     }
 }

@@ -6,18 +6,13 @@ group='com.github.shidatouy'
 android {
     compileSdkVersion 30
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
-            }
-        }
     }
 
     buildFeatures{
@@ -26,29 +21,29 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.2.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    //RxPermissions//运行时权限
+
+    //运行时权限
     api 'com.permissionx.guolindev:permissionx:1.4.0'
+    //图片加载（预览页使用）
     api 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
-    //Glioading
+    //加载/空白/错误三种状态页
     api 'com.billy.android:gloading:1.0.0'
+    //RecyclerView 万能适配器（BaseDataBindingAdapter 依赖）
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
-    api 'com.kongzue.dialog_v3x:dialog:3.1.7'
-    api 'com.android.support:multidex:1.0.1'
-    //下拉 上拉刷新
-    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-22'
-    //新版本
-    api 'com.tencent:mmkv:1.0.23'
-    api 'com.android.support:multidex:1.0.3'
-    api 'org.litepal.guolindev:core:3.2.3'
-    api 'com.github.shidatouy:okhttputils2:v1.0.0'
-    api 'com.github.getActivity:ShapeView:6.0'
-    //ARouter
-    api 'com.alibaba:arouter-api:1.2.1.1'
     api 'androidx.recyclerview:recyclerview:1.2.0'
+    //底部弹窗（Tools.dialogA / BaseApplication 样式初始化）
+    api 'com.kongzue.dialog_v3x:dialog:3.1.7'
+    //键值存储（MMkvUtil）
+    api 'com.tencent:mmkv:1.0.23'
+
+    //网络（BaseActivity 取消本页请求、BaseModel 管理请求生命周期）
+    //JitPack 只认具体 tag / commit / 分支-SNAPSHOT，"Tag" 这种占位词会直接解析失败；
+    //1.+ 和 latest.release 虽然能解析，但每次构建都要查 metadata，不可复现，所以固定版本
+    api 'com.github.shidatouy:okhttputils2:v1.0.5'
+    //okhttputils2 内部依赖 Gson，这里显式声明，避免传递依赖变动导致 GsonUtil 编译不过
+    api 'com.google.code.gson:gson:2.8.6'
 }

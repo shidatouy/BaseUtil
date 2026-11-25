@@ -56,8 +56,13 @@ public abstract class BaseDataBindingAdapter<T, B extends ViewDataBinding> exten
 
     @Override
     protected void convert(@NonNull BaseBindingViewHolder<B> helper, T item) {
-        convert(helper.getBinding(), item);
-        helper.getBinding().executePendingBindings();
+        B binding = helper.getBinding();
+        // addHeaderView/addFooterView 走的是 createBaseViewHolder(View)，此时没有 binding
+        if (binding == null) {
+            return;
+        }
+        convert(binding, item);
+        binding.executePendingBindings();
     }
 
     protected abstract void convert(B b, T item);

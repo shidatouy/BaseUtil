@@ -2,22 +2,16 @@ package com.base_util.util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Build;
-import android.os.Environment;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.TextView;
 
-import com.base_util.imagepager.ImagePagerActivity;
+import com.base_util.photopreview.PhotoPreviewActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class ComData {
 
@@ -25,11 +19,7 @@ public class ComData {
      * 截取字符串的第一位到倒数第二位
      */
     public static String subString(String number) {
-        if (TextUtils.isEmpty(number)) {
-            return "";
-        }
-        String name = number.substring(0, number.length() - 1);
-        return name;
+        return removeLast(number);
     }
 
     /****
@@ -39,14 +29,15 @@ public class ComData {
      * @return
      */
     public static String ShowLongFileSzie(Long length) {
+        if (length == null || length <= 0) {
+            return "0B";
+        }
         if (length >= 1048576) {
             return (length / 1048576) + "MB";
         } else if (length >= 1024) {
             return (length / 1024) + "KB";
-        } else if (length < 1024) {
-            return length + "B";
         } else {
-            return "0KB";
+            return length + "B";
         }
     }
 
@@ -92,33 +83,28 @@ public class ComData {
     }
 
     /**
-     * @param images   图片数组 list<String>
-     * @param position 下标
+     * 查看多张图片
+     *
+     * @param images   图片地址列表
+     * @param position 默认显示第几张
      */
     public static void seePicture(List<String> images, int position, Context context) {
-        Intent intent = new Intent(context, ImagePagerActivity.class);
-        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, (Serializable) images);
-        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_INDEX, position);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addCategory(Intent.CATEGORY_DEFAULT);
-        context.startActivity(intent);
+        if (images == null || images.isEmpty() || context == null) {
+            return;
+        }
+        PhotoPreviewActivity.start(context, images, position);
     }
 
     /**
      * 查看单个图片
      */
     public static void seePicturePath(String path, Context context) {
-        if (TextUtils.isEmpty(path)) {
+        if (TextUtils.isEmpty(path) || context == null) {
             return;
         }
         List<String> paths = new ArrayList<>();
         paths.add(path);
-        Intent intent = new Intent(context, ImagePagerActivity.class);
-        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, (Serializable) paths);
-        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_INDEX, 0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addCategory(Intent.CATEGORY_DEFAULT);
-        context.startActivity(intent);
+        seePicture(paths, 0, context);
     }
 
     /**
@@ -139,11 +125,11 @@ public class ComData {
      * @return
      */
     public static int getPageCount(int total, int pageSize) {
-        if (total % pageSize == 0) {
-            return total / pageSize;
-        } else {
-            return total / pageSize + 1;
+        // pageSize 为 0 时旧写法会除零崩溃
+        if (total <= 0 || pageSize <= 0) {
+            return 0;
         }
+        return (total + pageSize - 1) / pageSize;
     }
 
 
@@ -154,12 +140,17 @@ public class ComData {
      * @param bitmap
      */
     public static void saveBitmap(String fileWj, String fileName, Bitmap bitmap) {
-        File file = new File(fileWj, fileName);
-        try {
-            FileOutputStream fos = new FileOutputStream(file);
+        if (bitmap == null || TextUtils.isEmpty(fileWj) || TextUtils.isEmpty(fileName)) {
+            return;
+        }
+        File dir = new File(fileWj);
+        if (!dir.exists() && !dir.mkdirs()) {
+            return;
+        }
+        // 旧实现在 compress 抛异常时不会关闭流，会导致文件句柄泄漏
+        try (FileOutputStream fos = new FileOutputStream(new File(dir, fileName))) {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
-            fos.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -12,6 +12,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GsonUtil {
@@ -25,17 +26,19 @@ public class GsonUtil {
      * @param <T>
      * @return 数组
      */
-    public static <T> List<T> stringToList(String json, Class clazz) {
+    public static <T> List<T> stringToList(String json, Class<T> clazz) {
+        if (json == null || json.length() == 0 || clazz == null) {
+            return new ArrayList<>();
+        }
         Type type = new ParameterizedTypeImpl(clazz);
-        List<T> list = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss")
-                .create().fromJson(json, type);
-        return list;
+        // 走 myGson，保证 null -> "" 的适配器生效；旧实现每次 new GsonBuilder() 会丢掉该配置
+        return myGson.fromJson(json, type);
     }
 
     private static class ParameterizedTypeImpl implements ParameterizedType {
-        Class clazz;
+        private final Class<?> clazz;
 
-        public ParameterizedTypeImpl(Class clz) {
+        public ParameterizedTypeImpl(Class<?> clz) {
             clazz = clz;
         }
 
