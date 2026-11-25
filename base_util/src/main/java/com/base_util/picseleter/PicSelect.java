@@ -40,9 +40,19 @@ public  class PicSelect {
     // ==================== 目录 ====================
 
     /** 应用私有根目录，外部存储不可用时退回内部存储 */
-    private static File baseDir(Context context) {
+    private static File rootDir(Context context) {
         File dir = context.getExternalFilesDir(null);
         return dir != null ? dir : context.getFilesDir();
+    }
+
+    /**
+     * 应用私有根目录的绝对路径，默认 `Android/data/包名/files`。
+     *
+     * 外部存储不可用（未挂载）时退回内部存储的 `files` 目录，
+     * 因此返回的路径在不同设备上可能不同，不要写死。
+     */
+    public static String getBaseDir(Context context) {
+        return rootDir(context).getAbsolutePath();
     }
 
     /**
@@ -50,7 +60,7 @@ public  class PicSelect {
      */
     public static File getImageDir(Context context) {
         return imageDirOverride == null
-                ? new File(baseDir(context), "imageFile")
+                ? new File(rootDir(context), "imageFile")
                 : new File(imageDirOverride);
     }
 
@@ -64,7 +74,7 @@ public  class PicSelect {
      */
     public static File getCompressDir(Context context) {
         return compressDirOverride == null
-                ? new File(baseDir(context), "compress")
+                ? new File(rootDir(context), "compress")
                 : new File(compressDirOverride);
     }
 
@@ -203,12 +213,5 @@ public  class PicSelect {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
         activity.startActivityForResult(intent, CHOOSE_REQUEST);
-    }
-
-    /**
-     * 应用私有目录（外部优先），旧方法名保留
-     */
-    public static String getSDPath(Context context) {
-        return baseDir(context).getAbsolutePath();
     }
 }
