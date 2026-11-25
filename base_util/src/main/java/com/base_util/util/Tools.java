@@ -62,7 +62,7 @@ public class Tools {
                 getImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        PicSelect.seleteImageViewAc(activity);
+                        PicSelect.selectImage(activity);
                         dismissDialog();
                     }
                 });

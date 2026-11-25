@@ -183,10 +183,20 @@ public  class PicSelect {
     /**
      * 从系统相册选择一张图片。
      *
+     * <pre>
+     * // 点击选图
+     * PicSelect.selectImage(this);
+     *
+     * // onActivityResult
+     * if (requestCode == PicSelect.CHOOSE_REQUEST &amp;&amp; data != null) {
+     *     String path = GetFilePathFromUri.getFileAbsolutePath(this, data.getData());
+     * }
+     * </pre>
+     *
      * 注意：Android 13 起需要 READ_MEDIA_IMAGES，低版本需要 READ_EXTERNAL_STORAGE，
      * 权限由调用方申请。
      */
-    public static void seleteImageViewAc(Activity activity) {
+    public static void selectImage(Activity activity) {
         if (activity == null || activity.isFinishing()) {
             return;
         }
